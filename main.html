@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P2</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="dark">
+    <div class="container">
+        <div class="sideBar">
+            <div class="input input2">
+                <input type="text" class="inp" id="search" placeholder="Search...">
+                <div id="suggestions"></div>
+            </div>
+            <div class="cards">
+                <div class="card" id="enseignants">
+                    <span class="Nbr">0</span>
+                    <span class="icon blue-color">
+                        <img src="img/prof.svg" alt="">
+                    </span>
+                    <span>Enseign.</span>
+                    <span class="add" id="addProf">+</span>
+                </div>
+                <div class="card" id="salles">
+                    <span class="Nbr">0</span>
+                    <span class="icon green-color">
+                        <img src="img/salle.svg" alt="">
+                    </span>
+                    <span>Salles</span>
+                    <span class="add" id="addSalle">+</span>
+                </div>
+                <div class="card" id="classes">
+                    <span class="Nbr">0</span>
+                    <span class="icon orange-color">
+                        <img src="img/classe.svg" alt="">
+                    </span>
+                    <span>Classes</span>
+                    <span class="add" id="addClasse">+</span>
+                </div>
+                <div class="card" id="modules">
+                    <span class="Nbr">0</span>
+                    <span class="icon red-color">
+                        <img src="img/trash.svg" alt="">
+                    </span>
+                    <span>Modules</span>
+                    <span class="add" id="addMod">+</span>
+                </div>
+            </div>
+            <div class="input">
+                <select id="select"></select>
+            </div>
+        </div>
+        <div class="content">
+            <div class="title">
+                <h1>PLanning : CDSD</h1>
+                <small class="sm-l">0 tache</small>
+                <small class="sm-r"></small>
+                <div class="theme-switcher">
+                    <input type="checkbox" id="switcher">
+                    <label for=switcher>switch</label>
+                  </div>
+                <!-- <span>+</span> -->
+            </div>
+            <div class="tasks">
+                <div class="hours gray-color">
+                    <span class="hour-name "></span>
+                    <div class="hour-content ">
+                        <small>8H</small>
+                        <small>9H</small>
+                        <small>10H</small>
+                        <small>11H</small>
+                        <small>12H</small>
+                        <small>13H</small>
+                        <small>14H</small>
+                        <small>15H</small>
+                        <small>16H</small>
+                        <small>17H</small>
+                    </div>
+                </div>
+                <div class="day">
+                    <div class="day-name my-color">
+                        <span>LUNDI</span>
+                        <span class="add-cours" day="1">+</span>
+                    </div>
+                    <div class="day-content" id="day_1">
+                        
+                    </div>
+                </div>
+                <div class="day">
+                    <div class="day-name my-color">
+                        <span>MARDI</span>
+                        <span class="add-cours" day="2">+</span>
+                    </div>
+                    <div class="day-content" id="day_2">
+                        
+                    </div>
+                </div>
+                <div class="day">
+                    <div class="day-name my-color">
+                        <span>MERCREDI</span>
+                        <span class="add-cours" day="3">+</span>
+                    </div>
+                    <div class="day-content" id="day_3">
+                        
+                    </div>
+                </div>
+                <div class="day">
+                    <div class="day-name my-color">
+                        <span>JEUDI</span>
+                        <span class="add-cours" day="4">+</span>
+                    </div>
+                    <div class="day-content" id="day_4"></div>
+                </div>
+                <div class="day">
+                    <div class="day-name my-color">
+                        <span>VENDREDI</span>
+                        <span class="add-cours" day="5">+</span>
+                    </div>
+                    <div class="day-content" id="day_5"></div>
+                </div>
+                <div class="day">
+                    <div class="day-name my-color">
+                        <span>SAMEDI</span>
+                        <span class="add-cours" day="6">+</span>
+                    </div>
+                    <div class="day-content" id="day_6"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal">
+        <div class="modal-content">
+            <div class="modal-header modal-center">
+                <h4 id="modalTitle">Modal Title</h4>
+            </div>
+            <div class="modal-body modal-center">
+                <form>
+                    <div class="hr"></div>
+                    <div class="form-group">
+                        <label for="select_module">Module</label>
+                        <select id="select_module" class="form-control"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="select_enseignant">Enseignant</label>
+                        <select id="select_enseignant" class="form-control"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="select_salle">Salle</label>
+                        <select id="select_salle" class="form-control"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="select_debut">Heure de Début</label>
+                        <select id="select_debut" class="form-control">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="select_fin">Heure de Fin</label>
+                        <select id="select_fin" class="form-control"></select>
+                    </div>
+                </form>
+            </div>
+            <small class="error-modal"></small>
+            <div class="modal-footer modal-center">
+                <button class="btn btn-primary" id="save">Ajouter</button>
+                <button class="btn btn-danger" id="closeModal">Annuler</button>
+            </div>
+        </div>
+    </div>
+    <div class="prof">
+        <div class="modal-content">
+            <div class="modal-header modal-center">
+                <h4 id="modalTitle">Ajout Prof</h4>
+            </div>
+            <div class="modal-body modal-center">
+                <form action="">
+                    <div class="hr"></div>
+                    <div class="form-group">
+                        <label for="nomProf">Nom </label>
+                        <input id="nomProf" placeholder="Nom Prof" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="select_mod1">Module 1 </label>
+                        <select id="select_mod1" class="form-control" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="select_mod2">Module 2 </label>
+                        <select id="select_mod2" class="form-control" ></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="select_mod3">Module 3 </label>
+                        <select id="select_mod3" class="form-control" ></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="select_mod4">Module 4 </label>
+                        <select id="select_mod4" class="form-control" ></select>
+                    </div>
+                </form>
+            </div>
+            <small class="error-mod"></small>
+            <div class="modal-footer modal-center">
+                <button class="btn btn-primary" id="saveProf">Ajouter</button>
+                <button class="btn btn-danger" id="closeProf">Annuler</button>
+            </div>
+        </div>
+    </div>
+    <div class="salle">
+        <div class="modal-content">
+            <div class="modal-header modal-center">
+                <h4 id="modalTitle">Ajout Salle</h4>
+            </div>
+            <div class="modal-body modal-center">
+                <form action="">
+                    <div class="hr"></div>
+                    <div class="form-group">
+                        <label for="nomSall">Nom:  </label>
+                        <input id="nomSall" placeholder="Nom Salle" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="effSal">Nbr Places: </label>
+                        <input id="effSal" placeholder="Effectif Salle" required/>
+                    </div>
+                </form>
+            </div>
+            <small class="error-mod"></small>
+            <div class="modal-footer modal-center">
+                <button class="btn btn-primary" id="saveSalle">Ajouter</button>
+                <button class="btn btn-danger" id="closeSalle">Annuler</button>
+            </div>
+        </div>
+    </div>
+    <div class="classe">
+        <div class="modal-content">
+            <div class="modal-header modal-center">
+                <h4 id="modalTitle">Ajout Classe</h4>
+            </div>
+            <div class="modal-body modal-center">
+                <form action="">
+                    <div class="hr"></div>
+                    <div class="form-group">
+                        <label for="nomClasse">Nom:  </label>
+                        <input id="nomClasse" placeholder="Nom Classe" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="effCla">Effectif: </label>
+                        <input id="effCla" placeholder="Effectif Classe" required/>
+                    </div>
+                </form>
+            </div>
+            <small class="error-mod"></small>
+            <div class="modal-footer modal-center">
+                <button class="btn btn-primary" id="saveClasse">Ajouter</button>
+                <button class="btn btn-danger" id="closeClasse">Annuler</button>
+            </div>
+        </div>
+    </div>
+    <div class="module">
+        <div class="modal-content">
+            <div class="modal-header modal-center">
+                <h4 id="modalTitle">Ajout Module</h4>
+            </div>
+            <div class="modal-body modal-center">
+                <form action="">
+                    <div class="hr"></div>
+                    <div class="form-group">
+                        <label for="nomModule">Nom:  </label>
+                        <input id="nomModule" placeholder="Nom Module" required/>
+                    </div>
+                </form>
+            </div>
+            <small class="error-mod"></small>
+            <div class="modal-footer modal-center">
+                <button class="btn btn-primary" id="saveMod">Ajouter</button>
+                <button class="btn btn-danger" id="closeMod">Annuler</button>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="theme-switcher">
+        <input type="checkbox" id="switcher">
+        <label for=switcher>switch</label>
+      </div> -->
+    <script src="sche.js"></script>
+</body>
+</html>
