@@ -43,8 +43,8 @@ body{
 }
 .container{
     background-color:var(--color-two);
-    width: 65%;
-    height: 70%;
+    width: 90%;
+    height: 90%;
     color: var(--text-color);
     border-radius: 15px;
     box-shadow: 1px 3px 10px rgba(0, 0, 0,0.3);

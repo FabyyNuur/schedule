@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - Planning Scolaire</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .test-button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .test-button:hover {
+            background: #0056b3;
+        }
+        .test-result {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .info { background: #d1ecf1; color: #0c5460; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 Test de l'Application Planning</h1>
+        
+        <h2>Tests d'intégration</h2>
+        <button class="test-button" onclick="testDataManager()">Test DataManager</button>
+        <button class="test-button" onclick="testUIManager()">Test UIManager</button>
+        <button class="test-button" onclick="testAddCours()">Test Ajout Cours</button>
+        
+        <div id="test-results"></div>
+        
+        <h2>🚀 Accès à l'application</h2>
+        <p>
+            <a href="main.html" target="_blank" style="color: #007bff; text-decoration: none; font-weight: bold;">
+                ➡️ Ouvrir l'application de planning
+            </a>
+        </p>
+        
+        <h2>📋 Instructions de test</h2>
+        <ol>
+            <li>Cliquez sur l'un des boutons de test ci-dessus</li>
+            <li>Ou ouvrez l'application et testez l'ajout de cours :
+                <ul>
+                    <li>Cliquez sur le bouton <strong>+</strong> à côté d'un jour</li>
+                    <li>Remplissez le formulaire</li>
+                    <li>Cliquez sur "Ajouter"</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+
+    <script>
+        function addResult(message, type = 'info') {
+            const results = document.getElementById('test-results');
+            const div = document.createElement('div');
+            div.className = `test-result ${type}`;
+            div.textContent = message;
+            results.appendChild(div);
+        }
+
+        function testDataManager() {
+            addResult('🔄 Test du DataManager...', 'info');
+            
+            try {
+                // Test basic functions
+                if (typeof dataManager !== 'undefined') {
+                    addResult('✅ DataManager chargé avec succès', 'success');
+                    
+                    const classes = dataManager.getData('classes');
+                    if (classes && classes.length > 0) {
+                        addResult(`✅ ${classes.length} classes trouvées`, 'success');
+                    } else {
+                        addResult('⚠️ Aucune classe trouvée', 'error');
+                    }
+                } else {
+                    addResult('❌ DataManager non trouvé', 'error');
+                }
+            } catch (error) {
+                addResult(`❌ Erreur DataManager: ${error.message}`, 'error');
+            }
+        }
+
+        function testUIManager() {
+            addResult('🔄 Test de l\'UIManager...', 'info');
+            
+            try {
+                if (typeof uiManager !== 'undefined') {
+                    addResult('✅ UIManager chargé avec succès', 'success');
+                    
+                    // Test des éléments DOM
+                    const addCoursButtons = document.querySelectorAll('.add-cours');
+                    if (addCoursButtons.length === 6) {
+                        addResult('✅ 6 boutons d\'ajout de cours trouvés', 'success');
+                    } else {
+                        addResult(`⚠️ ${addCoursButtons.length} boutons trouvés (attendu: 6)`, 'error');
+                    }
+                } else {
+                    addResult('❌ UIManager non trouvé', 'error');
+                }
+            } catch (error) {
+                addResult(`❌ Erreur UIManager: ${error.message}`, 'error');
+            }
+        }
+
+        function testAddCours() {
+            addResult('🔄 Test d\'ajout de cours...', 'info');
+            
+            try {
+                // Simuler un clic sur le premier bouton d'ajout
+                const firstAddButton = document.querySelector('.add-cours[day="1"]');
+                if (firstAddButton) {
+                    addResult('✅ Bouton d\'ajout Lundi trouvé', 'success');
+                    
+                    // Simuler le clic
+                    firstAddButton.click();
+                    
+                    // Vérifier si le modal s'ouvre
+                    setTimeout(() => {
+                        const modal = document.querySelector('.modal');
+                        if (modal && modal.classList.contains('open')) {
+                            addResult('✅ Modal ouvert avec succès', 'success');
+                        } else {
+                            addResult('❌ Modal ne s\'ouvre pas', 'error');
+                        }
+                    }, 100);
+                } else {
+                    addResult('❌ Bouton d\'ajout non trouvé', 'error');
+                }
+            } catch (error) {
+                addResult(`❌ Erreur test ajout: ${error.message}`, 'error');
+            }
+        }
+
+        // Chargement automatique des tests
+        window.addEventListener('load', () => {
+            addResult('🎯 Page de test chargée', 'info');
+            
+            // Vérifier si on peut accéder aux scripts
+            setTimeout(() => {
+                if (typeof dataManager === 'undefined') {
+                    addResult('ℹ️ Pour tester, ouvrez d\'abord l\'application principale', 'info');
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

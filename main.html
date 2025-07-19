@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>P2</title>
+    <title>Gestionnaire de Planning Scolaire</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="enhanced-styles.css">
 </head>
 <body data-theme="dark">
     <div class="container">
@@ -59,8 +60,15 @@
                 <small class="sm-r"></small>
                 <div class="theme-switcher">
                     <input type="checkbox" id="switcher">
-                    <label for=switcher>switch</label>
-                  </div>
+                    <label for="switcher">switch</label>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn btn-small" id="exportData" title="Exporter les données">📥</button>
+                    <button class="btn btn-small" id="importData" title="Importer les données">📤</button>
+                    <button class="btn btn-small" id="resetData" title="Réinitialiser">🔄</button>
+                    <button class="btn btn-small" onclick="advancedManager.generateReport()" title="Générer un rapport">📊</button>
+                    <button class="btn btn-small" onclick="advancedManager.optimizePlanning()" title="Détecter les conflits">⚠️</button>
+                </div>
                 <!-- <span>+</span> -->
             </div>
             <div class="tasks">
@@ -132,39 +140,67 @@
     </div>
     <div class="modal">
         <div class="modal-content">
-            <div class="modal-header modal-center">
-                <h4 id="modalTitle">Modal Title</h4>
+            <div class="modal-header">
+                <h4 id="modalTitle">📚 Ajouter un Cours</h4>
+                <button class="close-btn" id="closeModal">&times;</button>
             </div>
-            <div class="modal-body modal-center">
-                <form>
-                    <div class="hr"></div>
-                    <div class="form-group">
-                        <label for="select_module">Module</label>
-                        <select id="select_module" class="form-control"></select>
+            <div class="modal-body">
+                <form action="" id="coursForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="select_module">📖 Module</label>
+                            <select id="select_module" class="form-control" required>
+                                <option value="">Sélectionner un module</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="select_enseignant">👨‍🏫 Enseignant</label>
+                            <select id="select_enseignant" class="form-control" required>
+                                <option value="">Sélectionner un enseignant</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="select_enseignant">Enseignant</label>
-                        <select id="select_enseignant" class="form-control"></select>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="select_salle">🏫 Salle</label>
+                            <select id="select_salle" class="form-control" required>
+                                <option value="">Sélectionner une salle</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="select_type">📋 Type de cours</label>
+                            <select id="select_type" class="form-control">
+                                <option value="cours">Cours magistral</option>
+                                <option value="td">Travaux dirigés</option>
+                                <option value="tp">Travaux pratiques</option>
+                                <option value="examen">Examen</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="select_salle">Salle</label>
-                        <select id="select_salle" class="form-control"></select>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="select_debut">🕐 Heure de début</label>
+                            <select id="select_debut" class="form-control" required>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="select_fin">🕐 Heure de fin</label>
+                            <select id="select_fin" class="form-control" required>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="select_debut">Heure de Début</label>
-                        <select id="select_debut" class="form-control">
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="select_fin">Heure de Fin</label>
-                        <select id="select_fin" class="form-control"></select>
+                    <div class="form-group full-width">
+                        <label for="cours_notes">📝 Notes (optionnel)</label>
+                        <textarea id="cours_notes" class="form-control" placeholder="Notes additionnelles sur le cours..." rows="3"></textarea>
                     </div>
                 </form>
             </div>
-            <small class="error-modal"></small>
-            <div class="modal-footer modal-center">
-                <button class="btn btn-primary" id="save">Ajouter</button>
-                <button class="btn btn-danger" id="closeModal">Annuler</button>
+            <div class="error-display">
+                <small class="error-mod"></small>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="closeModal2">❌ Annuler</button>
+                <button class="btn btn-primary" id="save">✅ Ajouter le cours</button>
             </div>
         </div>
     </div>
@@ -276,10 +312,10 @@
             </div>
         </div>
     </div>
-    <!-- <div class="theme-switcher">
-        <input type="checkbox" id="switcher">
-        <label for=switcher>switch</label>
-      </div> -->
+    <!-- Scripts -->
+    <script src="data-manager.js"></script>
+    <script src="ui-manager.js"></script>
+    <script src="advanced-manager.js"></script>
     <script src="sche.js"></script>
 </body>
 </html>
